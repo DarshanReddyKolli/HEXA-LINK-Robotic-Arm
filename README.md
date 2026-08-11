@@ -1,168 +1,225 @@
-# HEXA-LINK-Robotic-Arm
-Bluetooth-controlled 6-DOF robotic arm based on ATmega328P, PCA9685 and HC-05.
 # HEXA-LINK Robotic Arm 🤖
 
-**A Bluetooth-controlled 6-DOF robotic arm developed as a diploma project in Automation & Robotics Engineering.**
+> A Bluetooth-controlled 6-DOF robotic arm developed as a diploma project in Automation & Robotics Engineering.
 
-HEXA-LINK is a compact robotic arm designed for wireless control through a custom Android application. The system uses an **ATmega328P microcontroller**, **HC-05 Bluetooth module**, **PCA9685 16-channel PWM servo driver**, and **six servo motors** to control the different joints of the robotic arm.
-
-The mechanical structure was designed as a **3D-printed assembly**, while the control electronics were developed using a custom PCB.
+![Robotic Arm](Images/Assembly/Robotic%20ARM%20Assembled.jpeg)
 
 ---
 
 ## 📌 Project Overview
 
-The objective of HEXA-LINK is to develop a low-cost, educational robotic arm capable of performing controlled multi-axis movements through a wireless Android interface.
+**HEXA-LINK** is a 6-degree-of-freedom robotic arm developed as a diploma project in Automation & Robotics Engineering.
 
-The project combines:
+The robotic arm is controlled wirelessly using a custom Android application through an **HC-05 Bluetooth module**. An **ATmega328P microcontroller** processes the received commands and controls six servo motors through a **PCA9685 16-channel PWM servo driver**.
 
-* Embedded systems
-* Robotics and automation
-* Servo motor control
-* Bluetooth communication
-* PCB design and fabrication
-* 3D mechanical design
-* Android-based control
-
-The robotic arm receives commands from the Android application through Bluetooth. The **HC-05** module transfers these commands to the **ATmega328P**, which processes them and controls the servo motors through the **PCA9685 PWM driver**.
+The mechanical structure of the arm was developed using **3D-printed components**, while a custom PCB was designed and fabricated for the electronic control system.
 
 ---
 
 ## ✨ Key Features
 
-* 🤖 6-axis / 6-DOF robotic arm
-* 📱 Custom Android control application
-* 📡 Wireless Bluetooth communication
-* 🎛️ PCA9685 16-channel PWM servo driver
-* 🧠 ATmega328P-based control system
-* ⚙️ Six servo motors for robotic movement
-* 🖨️ 3D-designed and fabricated mechanical structure
-* 🔌 Custom PCB design
-* 🛠️ PCB etching and fabrication
-* 🔄 Multi-joint coordinated movement
-* 💰 Designed as a low-cost educational robotics platform
+- 🤖 6 Degrees of Freedom (6-DOF)
+- 📱 Custom Android control application
+- 📡 Wireless Bluetooth communication
+- 🔵 HC-05 Bluetooth module
+- 🧠 ATmega328P microcontroller
+- 🎛️ PCA9685 16-channel PWM servo driver
+- ⚙️ Six servo motors
+- 🖨️ 3D-printed mechanical structure
+- 🔌 Custom-designed PCB
+- 🔧 Custom electronic circuit and connections
 
 ---
 
-## 🧩 System Architecture
+## 🏗️ System Architecture
+
+The overall control flow of the robotic arm is:
 
 ```text
-             ┌──────────────────────┐
-             │    Android App       │
-             │  Wireless Controller │
-             └──────────┬───────────┘
-                        │
-                     Bluetooth
-                        │
-                        ▼
-             ┌──────────────────────┐
-             │       HC-05          │
-             │  Bluetooth Module    │
-             └──────────┬───────────┘
-                        │
-                        ▼
-             ┌──────────────────────┐
-             │      ATmega328P      │
-             │  Main Controller     │
-             └──────────┬───────────┘
-                        │ I²C
-                        ▼
-             ┌──────────────────────┐
-             │      PCA9685         │
-             │   PWM Servo Driver   │
-             └──────────┬───────────┘
-                        │
-          ┌─────────────┼─────────────┐
-          ▼             ▼             ▼
-       Servo 1       Servo 2       Servo 3
-       
-          ┌─────────────┼─────────────┐
-          ▼             ▼             ▼
-       Servo 4       Servo 5       Servo 6
+Android Application
+        │
+        │ Bluetooth
+        ▼
+    HC-05 Module
+        │
+        ▼
+    ATmega328P
+        │
+        ▼
+      PCA9685
+        │
+        ▼
+    Servo Motors
+        │
+        ▼
+  6-DOF Robotic Arm
 ```
 
----
+### Block Diagram
 
-## 🔧 Hardware
-
-| Component              | Purpose                      |
-| ---------------------- | ---------------------------- |
-| ATmega328P             | Main microcontroller         |
-| HC-05                  | Bluetooth communication      |
-| PCA9685                | 16-channel PWM servo control |
-| Servo Motors ×6        | Robotic arm actuation        |
-| 7805 Voltage Regulator | Voltage regulation           |
-| 12 MHz Crystal         | Microcontroller clock        |
-| Custom PCB             | Control electronics          |
-| 3D-Printed Parts       | Robotic arm structure        |
-| Power Supply           | System power                 |
-
----
-
-## 💻 Software & Tools
-
-* **Arduino IDE** — Microcontroller programming
-* **Embedded C/C++** — Control firmware
-* **EasyEDA** — PCB and circuit design
-* **Android Application** — Wireless robotic arm control
-* **3D CAD Software** — Mechanical structure design
+![Block Diagram](Electronics/Block-Diagram/Block%20Diagram.jpeg)
 
 ---
 
 ## ⚙️ Working Principle
 
-1. The user operates the robotic arm through the Android application.
-2. Movement commands are transmitted wirelessly using Bluetooth.
-3. The **HC-05 Bluetooth module** receives the commands.
-4. The **ATmega328P** interprets the received commands.
-5. The controller communicates with the **PCA9685** using I²C.
-6. The PCA9685 generates the required PWM signals.
-7. The six servo motors move according to the received commands.
-8. The combined movement of the servos produces the required robotic arm motion.
+1. The user selects a movement command using the Android application.
+2. The command is transmitted wirelessly through Bluetooth.
+3. The **HC-05 Bluetooth module** receives the command.
+4. The **ATmega328P** processes the received command.
+5. The ATmega328P sends the required control instructions to the **PCA9685 servo driver**.
+6. The PCA9685 generates PWM signals for the servo motors.
+7. The six servo motors move the robotic arm according to the selected command.
 
 ---
 
-## 🔌 Electronics & PCB
+## 🔩 Hardware Components
 
-The project includes a custom control PCB designed for integrating the microcontroller, Bluetooth communication, servo control, and supporting electronic components.
-
-The repository contains:
-
-* Circuit diagram
-* Schematic
-* PCB design
-* PCB 3D view
-* PCB etching tracks
-* Fabricated PCB
-* Soldered PCB
-* Connection diagram
+| Component | Purpose |
+|---|---|
+| ATmega328P | Main microcontroller |
+| PCA9685 | Multi-channel PWM servo control |
+| HC-05 | Bluetooth communication |
+| Servo Motors | Robotic arm actuation |
+| 7805 Voltage Regulator | Voltage regulation |
+| Crystal | Microcontroller clock |
+| Custom PCB | Electronic control and connections |
+| 3D Printed Parts | Mechanical structure |
 
 ---
 
-## 🖨️ Mechanical Design
+## 🧠 Main Controller
 
-The robotic arm structure was designed as a modular 3D-printed assembly.
+### ATmega328P
 
-The repository includes various stages of the mechanical design, including:
+The **ATmega328P** acts as the main controller of the robotic arm.
 
-* 3D structure designs
-* Individual component designs
-* Assembly views
-* Final assembled robotic arm
+It receives commands from the HC-05 Bluetooth module and processes them before sending the required control instructions to the PCA9685 servo driver.
 
----
-
-## 📱 Android Control
-
-A custom Android application was developed to provide a wireless interface for controlling the robotic arm.
-
-The application communicates with the robotic arm through the HC-05 Bluetooth module and sends movement commands to the ATmega328P.
-
-> The Android APK included in this repository is provided for demonstration and educational purposes.
+![ATmega328P](Images/Electronics/ATMEGA328p.jpeg)
 
 ---
 
-## 📂 Repository Structure
+## 🎛️ Servo Driver
+
+### PCA9685
+
+The **PCA9685** is used as the PWM servo driver for controlling the six servo motors of the robotic arm.
+
+It provides multiple PWM channels, allowing the servo motors to be controlled independently.
+
+---
+
+## 📡 Bluetooth Communication
+
+### HC-05
+
+The **HC-05 Bluetooth module** provides wireless communication between the Android application and the robotic arm controller.
+
+![HC-05](Images/Electronics/HC%2005.png)
+
+---
+
+## 🔌 Electronics
+
+The electronic control system was developed around the ATmega328P, HC-05 Bluetooth module, PCA9685 servo driver and supporting components.
+
+### Circuit Diagram
+
+![Circuit Diagram](Electronics/Circuit-Diagram/Circuit%20Diagram.jpeg)
+
+### Connection Diagram
+
+![Connection Diagram](Electronics/Circuit-Diagram/Connection%20Diagram.png)
+
+### Schematic Diagram
+
+![Schematic Diagram](Electronics/Schematic/Schematic%20Diagram.png)
+
+---
+
+## 🟦 PCB Development
+
+A custom PCB was designed and fabricated for the robotic arm control electronics.
+
+### PCB Design
+
+![EasyEDA PCB Design](Electronics/PCB/Easy%20EDA.png)
+
+### PCB 3D View
+
+![PCB 3D View](Electronics/PCB/Final%20PCB%20Board%203D%20view.png)
+
+### PCB Etching Tracks
+
+![PCB Etching Tracks](Electronics/PCB/PCB%20Eteching%20Tracks.png)
+
+### PCB Fabrication
+
+![PCB Fabrication](Electronics/PCB/PCB%20Fabrication.jpeg)
+
+### Final PCB Board
+
+![Final PCB](Electronics/PCB/Final%20PCB%20Board.jpeg)
+
+### Soldered PCB
+
+![Soldered PCB](Electronics/PCB/Soldered%20PCB%20After%20Etching%20Process.jpeg)
+
+---
+
+## 🤖 Mechanical Structure
+
+The robotic arm uses a **3D-printed mechanical structure** designed to support the six servo-driven axes of movement.
+
+![Assembled Robotic Arm](Images/Assembly/Robotic%20ARM%20Assembled.jpeg)
+
+---
+
+## 📱 Android Application
+
+A custom Android application was developed as the wireless control interface for the robotic arm.
+
+The application communicates with the robotic arm using the **HC-05 Bluetooth module**.
+
+### Communication Flow
+
+```text
+Android Application
+        │
+        │ Bluetooth
+        ▼
+      HC-05
+        │
+        ▼
+    ATmega328P
+        │
+        ▼
+     PCA9685
+        │
+        ▼
+   Servo Motors
+```
+
+The compiled Android application is included in this repository:
+
+`Android-App/roboticARM.apk`
+
+> Note: The Android application source code is not included in this repository. Only the compiled APK is provided.
+
+---
+
+## 💻 Arduino Firmware
+
+The Arduino firmware contains the control logic for the robotic arm.
+
+The source code is available at:
+
+`Arduino/HEXA-LINK-Robotic-Arm.ino`
+
+---
+
+## 📂 Project Structure
 
 ```text
 HEXA-LINK-Robotic-Arm/
@@ -170,97 +227,107 @@ HEXA-LINK-Robotic-Arm/
 ├── Arduino/
 │   └── HEXA-LINK-Robotic-Arm.ino
 │
-├── PCB/
-│   ├── Circuit-Diagram/
-│   ├── Schematic/
-│   ├── PCB-Design/
-│   └── Fabrication/
-│
-├── 3D-Design/
-│   └── Structure-Diagrams/
-│
 ├── Android-App/
 │   └── roboticARM.apk
 │
+├── Electronics/
+│   ├── Block-Diagram/
+│   ├── Circuit-Diagram/
+│   ├── PCB/
+│   └── Schematic/
+│
 ├── Images/
 │   ├── Assembly/
-│   ├── Electronics/
-│   └── Components/
+│   │   └── Robotic ARM Assembled.jpeg
+│   │
+│   └── Electronics/
+│       ├── Component Images
+│       └── Hardware Reference Images
 │
-├── Documentation/
-│
-├── README.md
-└── LICENSE
+└── README.md
 ```
+
+---
+
+## 🛠️ Software & Tools
+
+- Arduino IDE
+- Embedded C/C++
+- Android Application
+- Bluetooth Communication
+- EasyEDA
+- PCB Design
+- PCB Fabrication
+- 3D Printing
 
 ---
 
 ## 🎯 Project Objectives
 
-* Develop a functional multi-axis robotic arm.
-* Implement wireless robotic control using Bluetooth.
-* Learn practical servo motor control.
-* Develop an ATmega328P-based embedded control system.
-* Design and fabricate a custom PCB.
-* Develop a 3D-printed robotic structure.
-* Integrate hardware, software, electronics, and mechanical systems into a single working prototype.
+The main objectives of the project were:
+
+- To design and develop a functional 6-DOF robotic arm.
+- To implement wireless control using Bluetooth.
+- To control multiple servo motors using the PCA9685.
+- To develop a custom electronic control PCB.
+- To design and fabricate a 3D-printed mechanical structure.
+- To integrate hardware, firmware and Android-based control into one robotic system.
 
 ---
 
-## 📚 Learning Outcomes
+## 📚 Project Documentation
 
-Through this project, the following practical skills were developed:
+This repository contains the major technical documentation and development resources of the project, including:
 
-* Microcontroller programming
-* Arduino-based embedded systems
-* Servo motor control
-* I²C communication
-* Bluetooth communication
-* PCB schematic and layout design
-* PCB fabrication and soldering
-* 3D mechanical design
-* Robotics system integration
-* Hardware troubleshooting
-* Android-based hardware control
+- System block diagram
+- Circuit diagram
+- Connection diagram
+- Electrical schematic
+- PCB design
+- PCB fabrication stages
+- Arduino firmware
+- Android control application
+- Mechanical assembly photographs
+- Electronic component references
 
 ---
 
 ## 🚀 Future Improvements
 
-Possible improvements for future versions include:
+Possible future improvements include:
 
-* Inverse kinematics-based control
-* Automatic trajectory generation
-* Improved precision and repeatability
-* End-effector/tool attachment system
-* Position feedback using sensors
-* Computer vision integration
-* Wi-Fi-based remote control
-* Gesture-based control
-* Improved mechanical strength
-* Closed-loop servo control
+- Improved mechanical precision
+- Better servo positioning
+- Wi-Fi-based control
+- Web-based robotic arm control
+- Camera-based object detection
+- Automated object picking and placement
+- Feedback-based position control
+- Computer vision integration
 
 ---
 
-## 👨‍💻 Project Team
+## 👨‍💻 Project Information
 
-**HEXA-LINK Robotic Arm**
-Diploma Project — Automation & Robotics Engineering
-
-Developed as an academic robotics project focused on practical implementation of embedded systems, electronics, mechanical design, and robotic control.
-
----
-
-## 📜 License
-
-This project is intended primarily for educational and demonstration purposes.
-
-Please refer to the repository license before using, modifying, or redistributing the project.
+**Project:** HEXA-LINK Robotic Arm  
+**Program:** Diploma in Automation & Robotics Engineering  
+**Project Type:** Academic / Diploma Project  
+**Control Method:** Bluetooth  
+**Degrees of Freedom:** 6-DOF  
+**Main Controller:** ATmega328P  
+**Servo Driver:** PCA9685  
+**Wireless Module:** HC-05  
+**Control Interface:** Android Application  
+**Mechanical Structure:** 3D Printed
 
 ---
 
-## ⭐ Acknowledgements
+## 📄 License
 
-This project was developed as part of an academic diploma project in **Automation & Robotics Engineering**.
+This project is provided for educational and portfolio purposes.
 
-Special thanks to the faculty, institution, and project team members who supported the development, fabrication, testing, and documentation of the project.
+Please contact the repository owner before reusing the complete project commercially.
+
+---
+
+⭐ If you find this project useful or interesting, consider giving the repository a star.
