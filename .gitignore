@@ -1,0 +1,29 @@
+# Arduino
+*.tmp
+*.bak
+
+# Arduino build files
+build/
+*.hex
+*.elf
+*.eep
+
+# Android / Gradle
+.gradle/
+build/
+captures/
+*.iml
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Microsoft Office temporary files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Temporary files
+*.tmp
+*.temp
